@@ -3,11 +3,11 @@ import React from 'react'
 import Fridgecomp from './Fridgecomp';
 const Ingred = ({navigation}) => {
   // if(navigation===undefined){return;}
-  console.log("ingred");
-  console.log(navigation);
+  // console.log("ingred");
+  // console.log(navigation);
   return (
-    <TouchableOpacity 
-    onPress={() =>{ navigation.navigate('Details')}}>
+    // <TouchableOpacity 
+    // onPress={() =>{ navigation.navigate('Details')}}>
 
     <View style={{
       marginLeft: 20,
@@ -25,7 +25,8 @@ const Ingred = ({navigation}) => {
         fontSize: 7
       }}>View list</Text>
       
-    </View></TouchableOpacity>
+    </View>
+    // </TouchableOpacity>
     
   );
 }
@@ -42,7 +43,7 @@ const FoodCard = (props) => {
               <View style={styles.foodhead}>
                 <Text style={[styles.foodTxt]}>{props.dish.name}</Text>
                 <View style={styles.ratingbtn}>
-                  <Text style={{ color: "white", fontSize: 10, textAlign: "center" }}>{props.dish.rating}*</Text>
+                  <Text style={{ color: "white", fontSize: 10, textAlign: "center" }}>{props.dish.rating} &#x2605; Star</Text>
                 </View>
               </View>
             </View>
@@ -106,7 +107,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     backgroundColor: "#51C452",
     height: 16,
-    width: 30,
+    width: 33,
     marginHorizontal: 5,
     paddingVertical:1,
 

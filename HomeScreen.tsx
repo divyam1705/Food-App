@@ -19,9 +19,8 @@ import DateTime from './Components/DateTime';
 
 
 
-function App({navigation}): JSX.Element {
+function App({ navigation }): JSX.Element {
   const [data, setData] = useState(null);
-  const [popdata, setpopdata] = useState(null)
   const [isLoading, setIsLoading] = useState(true);
   //  console.log(navigation);
   useEffect(() => {
@@ -30,11 +29,9 @@ function App({navigation}): JSX.Element {
   const fetchData = async () => {
     try {
       const response = await fetch('https://8b648f3c-b624-4ceb-9e7b-8028b7df0ad0.mock.pstmn.io/dishes/v1/');
-      const res2 = await fetch('https://8b648f3c-b624-4ceb-9e7b-8028b7df0ad0.mock.pstmn.io/dishes/v1/1');
 
       const json = await response.json();
-      const js2= await res2.json();
-      setpopdata(js2);
+      
       setData(json);
       setIsLoading(false);
     } catch (error) {
@@ -45,14 +42,7 @@ function App({navigation}): JSX.Element {
   return (
     <>
       <StatusBar backgroundColor="white" />
-      <View style={styles.topbar}>
-        <View style={styles.topbarwrap}>
-          <TouchableOpacity>
-            <Image style={styles.arrowimg} source={require('./Icons/arrowleft.jpg')} />
-          </TouchableOpacity>
-          <Text style={styles.topbartxt}>Select Dishes</Text>
-        </View>
-      </View>
+
       <View style={styles.container}>
         <View>
           <View style={{
@@ -63,9 +53,9 @@ function App({navigation}): JSX.Element {
           <DateTime />
         </View>
         <Tags />
-        {!isLoading&&<Popular 
-        key={1}
-        data={data.popularDishes}/>}
+        {!isLoading && <Popular
+          key={1}
+          data={data.popularDishes} />}
         <View style={styles.foodheaderwrapper}>
           <View style={styles.foodheader}>
             <Text style={{
@@ -82,29 +72,39 @@ function App({navigation}): JSX.Element {
             </TouchableOpacity>
           </View>
         </View>
-        {!isLoading&&(<ScrollView style={{marginBottom:60}}>
-          {data.dishes.map((dish)=>{
-            return(<FoodCard
-            key={dish.key}
-            
-              dish={dish}/>);
+        {!isLoading && (<ScrollView style={{ marginBottom: 60 }}>
+          {data.dishes.map((dish) => {
+            return (
+              <TouchableOpacity onPress={() => navigation.navigate('Details')}>
+
+                <FoodCard
+                  key={dish.key}
+
+                  dish={dish} />
+              </TouchableOpacity>
+            );
           })}
-          {data.dishes.map((dish)=>{
-            return(<FoodCard
-            key={dish.key}
-            navigation={navigation}
-              dish={dish}/>);
+          {data.dishes.map((dish) => {
+            return (
+              <TouchableOpacity onPress={() => navigation.navigate('Details')}>
+
+                <FoodCard
+                  key={dish.key}
+                  navigation={navigation}
+                  dish={dish} />
+              </TouchableOpacity>);
           })}
         </ScrollView>)}
-        {isLoading&&(
+        {isLoading && (
           <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-          <ActivityIndicator size="large" />
-        </View>
+            <ActivityIndicator size="large" />
+          </View>
         )}
 
 
       </View>
       <BottomCart />
+
     </>
   );
 }
@@ -123,12 +123,12 @@ const styles = StyleSheet.create({
   arrowimg: {
     height: 17,
     width: 10,
-    marginTop:5
+    marginTop: 5
   },
   topbarwrap: {
     flex: 1,
     flexDirection: "row",
-    gap:20,
+    gap: 20,
     marginTop: 13,
   },
   topbartxt: {
